@@ -1,0 +1,14 @@
+{
+  "turns": [
+    { "role": "user", "content": "How much exercise should I get per week?" },
+    { "role": "agent", "content": "Adults should aim for at least 150 minutes of moderate activity per week, e.g. brisk walking or cycling." }
+  ],
+  "retrieved_chunks": [
+    {
+      "chunk_id": "KB001-1",
+      "text": "Adults aged 18-64 should perform at least 150-300 minutes of moderate-intensity aerobic physical activity per week.",
+      "source": "WHO 2020",
+      "retrieval_score": 0.94
+    }
+  ]
+}

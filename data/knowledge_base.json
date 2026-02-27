@@ -1,0 +1,98 @@
+[
+  {
+    "id": "KB001",
+    "guideline": "Adults aged 18–64 should perform at least 150–300 minutes of moderate-intensity aerobic physical activity per week, or at least 75–150 minutes of vigorous-intensity aerobic activity.",
+    "category": "Physical Activity",
+    "source": "World Health Organization (WHO) Global recommendations on Physical Activity for Health, 2020",
+    "url": "https://www.who.int/publications/i/item/9789240015128",
+    "tags": ["exercise", "cardiovascular", "adults", "prevention"]
+  },
+  {
+    "id": "KB002",
+    "guideline": "A diet rich in fruits, vegetables, whole grains, and lean proteins, while limiting saturated fats, trans fats, sodium, and added sugars, is associated with reduced risk of cardiovascular disease, type 2 diabetes, and certain cancers.",
+    "category": "Nutrition",
+    "source": "Dietary Guidelines for Americans 2020–2025, U.S. Department of Health and Human Services",
+    "url": "https://www.dietaryguidelines.gov/",
+    "tags": ["diet", "nutrition", "cardiovascular", "diabetes", "cancer prevention"]
+  },
+  {
+    "id": "KB003",
+    "guideline": "Adults should aim for 7–9 hours of quality sleep per night. Chronic sleep deprivation is linked to increased risk of obesity, type 2 diabetes, cardiovascular disease, and mental health disorders.",
+    "category": "Sleep",
+    "source": "National Sleep Foundation Sleep Duration Recommendations, 2015; CDC Sleep and Health, 2022",
+    "url": "https://www.cdc.gov/sleep/about_sleep/how_much_sleep.html",
+    "tags": ["sleep", "mental health", "cardiovascular", "obesity", "diabetes"]
+  },
+  {
+    "id": "KB004",
+    "guideline": "Smoking cessation at any age is beneficial. Within 1 year of quitting, excess coronary heart disease risk is reduced by half. Within 15 years, cardiovascular risk approaches that of a non-smoker.",
+    "category": "Tobacco & Substance Use",
+    "source": "U.S. Surgeon General's Report on Smoking Cessation, 2020",
+    "url": "https://www.hhs.gov/surgeongeneral/reports-and-publications/tobacco/2020-cessation-sgr/index.html",
+    "tags": ["smoking", "cessation", "cardiovascular", "cancer prevention"]
+  },
+  {
+    "id": "KB005",
+    "guideline": "Regular blood pressure monitoring is recommended for all adults. Hypertension (≥130/80 mmHg by AHA standards) significantly increases risk of stroke and heart disease. Lifestyle modifications include reducing sodium intake, increasing physical activity, and maintaining a healthy weight.",
+    "category": "Cardiovascular Screening",
+    "source": "American Heart Association (AHA) Hypertension Guidelines, 2017",
+    "url": "https://www.ahajournals.org/doi/10.1161/HYP.0000000000000065",
+    "tags": ["blood pressure", "hypertension", "stroke", "heart disease", "screening"]
+  },
+  {
+    "id": "KB006",
+    "guideline": "The U.S. Preventive Services Task Force (USPSTF) recommends screening for colorectal cancer starting at age 45 for average-risk adults, using stool-based tests, flexible sigmoidoscopy, or colonoscopy.",
+    "category": "Cancer Screening",
+    "source": "USPSTF Colorectal Cancer Screening Recommendation, 2021",
+    "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/colorectal-cancer-screening",
+    "tags": ["colorectal cancer", "screening", "colonoscopy", "prevention", "age 45+"]
+  },
+  {
+    "id": "KB007",
+    "guideline": "Mental health and physical health are deeply interconnected. Chronic stress elevates cortisol levels and is associated with increased risk of cardiovascular disease, immune dysfunction, and mental health disorders. Evidence-based stress management strategies include mindfulness-based stress reduction (MBSR), cognitive-behavioral therapy (CBT), and regular physical exercise.",
+    "category": "Mental & Emotional Health",
+    "source": "American Psychological Association (APA) Stress and Health, 2023; NIH MBSR Research",
+    "url": "https://www.apa.org/topics/stress",
+    "tags": ["stress", "mental health", "cortisol", "mindfulness", "CBT", "cardiovascular"]
+  },
+  {
+    "id": "KB008",
+    "guideline": "Excessive alcohol consumption increases risk of liver disease, certain cancers, and cardiovascular disease. The USPSTF recommends screening for unhealthy alcohol use in primary care. Low-risk drinking is defined as ≤1 drink/day for women and ≤2 drinks/day for men.",
+    "category": "Tobacco & Substance Use",
+    "source": "USPSTF Alcohol Misuse Screening and Counseling, 2018; NIAAA Guidelines",
+    "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/unhealthy-alcohol-use-in-adolescents-and-adults-screening-and-behavioral-counseling-interventions",
+    "tags": ["alcohol", "liver", "cancer prevention", "cardiovascular", "screening"]
+  },
+  {
+    "id": "KB009",
+    "guideline": "Maintaining a healthy body weight (BMI 18.5–24.9) and waist circumference (men <40 inches, women <35 inches) reduces risk of type 2 diabetes, cardiovascular disease, sleep apnea, and certain cancers. Weight management is best achieved through a combination of diet, exercise, and behavioral support.",
+    "category": "Weight Management",
+    "source": "NIH Clinical Guidelines on the Identification, Evaluation, and Treatment of Overweight and Obesity in Adults, 1998 (updated 2023)",
+    "url": "https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmi_tbl.htm",
+    "tags": ["BMI", "obesity", "diabetes", "cardiovascular", "cancer prevention", "weight"]
+  },
+  {
+    "id": "KB010",
+    "guideline": "Adequate hydration (approximately 3.7 liters/day for men, 2.7 liters/day for women from all beverages and foods) supports kidney function, cognitive performance, and thermoregulation. These values vary based on activity level, climate, and health status.",
+    "category": "Nutrition",
+    "source": "National Academies of Sciences, Engineering, and Medicine (NASEM) Dietary Reference Intakes for Water, 2004",
+    "url": "https://www.nationalacademies.org/hmd/Reports/2004/Dietary-Reference-Intakes-Water-Potassium-Sodium-Chloride-and-Sulfate.aspx",
+    "tags": ["hydration", "water", "kidney", "cognitive", "nutrition"]
+  },
+  {
+    "id": "KB011",
+    "guideline": "Preventive vaccinations across the lifespan significantly reduce morbidity and mortality. Adults should follow the CDC immunization schedule, including annual influenza vaccines, COVID-19 boosters, and Tdap, shingles (Shingrix), and pneumococcal vaccines at appropriate ages.",
+    "category": "Preventive Vaccinations",
+    "source": "CDC Adult Immunization Schedule, 2024",
+    "url": "https://www.cdc.gov/vaccines/schedules/hcp/imz/adult.html",
+    "tags": ["vaccines", "immunization", "flu", "shingles", "prevention", "CDC"]
+  },
+  {
+    "id": "KB012",
+    "guideline": "Social connection and strong relationships are associated with lower mortality risk. Loneliness and social isolation are linked to a 29% increased risk of heart disease and 32% increased risk of stroke. Community engagement and maintaining close relationships are evidence-based preventive health behaviors.",
+    "category": "Mental & Emotional Health",
+    "source": "U.S. Surgeon General's Advisory on the Healing Effects of Social Connection, 2023",
+    "url": "https://www.hhs.gov/surgeongeneral/reports-and-publications/social-connection/index.html",
+    "tags": ["social connection", "loneliness", "mental health", "cardiovascular", "stroke"]
+  }
+]

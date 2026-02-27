@@ -1,0 +1,27 @@
+# Environment and secrets — never commit real keys
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+env/
+
+# IDE and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Test and build
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+*.egg-info/
+
+# Optional: uncomment if you want to exclude audit logs from version control
+# logs/
