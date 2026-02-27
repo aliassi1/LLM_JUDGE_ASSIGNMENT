@@ -11,11 +11,11 @@ An automated auditing system that evaluates a preventive health AI agent's conve
 │                    Syd Life AI Eval Pipeline                    │
 │                                                                 │
 │  data/                                                          │
-│  ├── knowledge_base.json     ← 12 scientifically-sourced        │
+│  ├── knowledge_base.json     ← 22 scientifically-sourced        │
 │  │                             preventive health guidelines     │
-│  └── transcripts.json        ← 13 mock transcripts w/ edge      │
-│                                cases (hallucination, diagnosis, │
-│                                empathy failure, safe escalation)│
+│  └── transcripts.json        ← 12 mock transcripts (T018–T029) │
+│                                with edge cases: hallucination,  │
+│                                medical safety, empathy failure  │
 │                                                                 │
 │  evaluator/                                                     │
 │  ├── criteria.py             ← Pydantic score models + verdict  │
@@ -60,7 +60,7 @@ Structured JSONL audit log + console summary
 
 **Why is Medical Safety evaluated first?** It is a hard gate. If the agent has crossed into diagnosis territory, the pipeline should immediately flag and short-circuit the moral harm before further analysis.
 
-**KB injection into Groundedness prompt:** The full knowledge base (in this case it is the retrived chunks)is injected into the Groundedness evaluator's system prompt, enabling the judge to fact-check claims directly against sourced guidelines.
+**KB injection into Groundedness prompt:** The retrieved chunks (or full KB when no chunks are provided) are injected into the Groundedness evaluator's system prompt, enabling the judge to fact-check claims directly against sourced guidelines.
 
 **`temperature=0.0` for all judge calls:** Evaluation should be deterministic and reproducible across runs.
 
@@ -70,26 +70,36 @@ Structured JSONL audit log + console summary
 
 ### Knowledge Base (`data/knowledge_base.json`)
 
-12 scientifically grounded preventive health guidelines with verifiable sources. Each entry is included so the Judge can check agent claims against real, citable evidence and catch hallucinations or misattributions.
+22 scientifically grounded preventive health guidelines with verifiable sources. Each entry is included so the Judge can check agent claims against real, citable evidence and catch hallucinations or misattributions. **KB001–KB012** cover core preventive topics; **KB013–KB022** align with the retrieved chunks used in the 12 evaluation transcripts (T018–T029).
 
 | ID | Category | Source | Reason included |
 |----|----------|--------|-----------------|
-| KB001 | Physical Activity | WHO Global Recommendations on Physical Activity, 2020 | Core exercise targets (150–300 min moderate / 75–150 min vigorous) — frequently cited by agents; any deviation or invented stat can be flagged. |
+| KB001 | Physical Activity | WHO Global Recommendations on Physical Activity, 2020 | Core exercise targets (150–300 min moderate / 75–150 min vigorous) — frequently cited; any deviation or invented stat can be flagged. |
 | KB002 | Nutrition | U.S. Dietary Guidelines 2020–2025 | Diet–disease links (CVD, diabetes, cancer); supports grounded nutrition advice and catches fake “miracle food” claims. |
 | KB003 | Sleep | National Sleep Foundation / CDC, 2022 | 7–9 hours, sleep–health links; tests whether the agent invents sleep stats or stays within evidence. |
-| KB004 | Tobacco Use | U.S. Surgeon General's Report on Smoking Cessation, 2020 | Cessation benefits (e.g. CVD risk halved at 1 year); supports quit-smoking conversations and flags invented timelines or guarantees. |
-| KB005 | Cardiovascular Screening | AHA Hypertension Guidelines, 2017 | BP thresholds (≥130/80), lifestyle modifications; prevents agents from inventing staging tables or “vascular strain” categories. |
-| KB006 | Cancer Screening | USPSTF Colorectal Cancer Screening, 2021 | Screening age (45+), test types; grounds screening advice and catches made-up intervals or recommendations. |
-| KB007 | Mental Health | APA / NIH MBSR Research | Stress–health links, MBSR/CBT/exercise; supports stress/burnout advice without crossing into diagnosis or invented protocols. |
-| KB008 | Alcohol Use | USPSTF / NIAAA Guidelines | Low-risk limits (≤1/2 drinks per day), screening; keeps alcohol advice grounded and avoids fake “safe intake” rules. |
-| KB009 | Weight Management | NIH Clinical Guidelines, 2023 | BMI range, waist circumference, diet/exercise/behavior; supports weight discussions without prescribing specific regimens. |
-| KB010 | Hydration | NASEM Dietary Reference Intakes, 2004 | Daily intake ranges (3.7 L men / 2.7 L women); catches invented “4+ liters cures kidney disease”–style claims. |
-| KB011 | Vaccinations | CDC Adult Immunization Schedule, 2024 | Flu, COVID, Tdap, Shingrix, pneumococcal; grounds vaccine advice and flags invented intervals or “fully protected for life” claims. |
-| KB012 | Social Connection | U.S. Surgeon General's Advisory, 2023 | Loneliness/isolation–mortality links (e.g. heart disease, stroke); supports social-health messaging with real stats. |
+| KB004 | Tobacco Use | U.S. Surgeon General's Report on Smoking Cessation, 2020 | Cessation benefits (e.g. CVD risk halved at 1 year); supports quit-smoking conversations and flags invented timelines. |
+| KB005 | Cardiovascular Screening | AHA Hypertension Guidelines, 2017 | BP thresholds (≥130/80), lifestyle modifications; used in T024 — prevents inventing staging tables or “vascular strain” categories. |
+| KB006 | Cancer Screening | USPSTF Colorectal Cancer Screening, 2021 | Screening age (45+), test types; grounds screening advice and catches made-up intervals. |
+| KB007 | Mental Health | APA / NIH MBSR Research | Stress–health links, MBSR/CBT/exercise; supports stress/burnout advice without crossing into diagnosis. |
+| KB008 | Alcohol Use | USPSTF / NIAAA Guidelines | Low-risk limits (≤1/2 drinks per day), screening; keeps alcohol advice grounded. |
+| KB009 | Weight Management | NIH Clinical Guidelines, 2023 | BMI range, waist circumference; supports weight discussions without prescribing regimens. |
+| KB010 | Hydration | NASEM Dietary Reference Intakes, 2004 | Daily intake ranges; catches invented “cures kidney disease”–style claims. |
+| KB011 | Preventive Vaccinations | CDC Adult Immunization Schedule, 2024 | Flu, COVID, Tdap, Shingrix, pneumococcal; used in T028 — grounds vaccine advice and flags invented intervals. |
+| KB012 | Social Connection | U.S. Surgeon General's Advisory, 2023 | Loneliness–mortality links; supports social-health messaging with real stats. |
+| KB013 | Infectious Disease Prevention | CDC Influenza (Flu) Prevention, 2023 | Flu vaccination, handwashing, when to seek care; **chunk for T018** — flu guidance + safe escalation. |
+| KB014 | Antibiotic Stewardship | CDC Antibiotic Use and Resistance, 2022 | Antibiotics vs viruses, resistance, when to see clinician; **chunk for T019** — sore throat / antibiotics. |
+| KB015 | Neurological / Headache | NIH/NINDS Migraine Overview, 2021 | Triggers, sleep, hydration, when to seek urgent care; **chunk for T020** — migraine (agent hallucinates cure). |
+| KB016 | Respiratory | GINA Asthma Patient Guidance, 2023 | Clinician-guided management, urgent care signs; **chunk for T021** — asthma (agent prescribes meds). |
+| KB017 | Diabetes Prevention & Screening | ADA Standards of Care, 2024 | Risk factors, screening, lifestyle; **chunk for T022** — family history diabetes. |
+| KB018 | Mental & Emotional Health | NIMH Panic Disorder, 2022 | Panic symptoms, CBT, breathing, when to seek evaluation; **chunk for T023** — panic attack (empathy fail). |
+| KB019 | Skin Cancer Prevention | AAD Sun Protection, 2023 | SPF 30+, reapplication, shade, clothing; **chunk for T025** — sunscreen. |
+| KB020 | Emergency Recognition | AHA/CDC Emergency Warning Signs, 2022 | Chest pain, breathing, fainting, neurologic deficits; **chunk for T026** — agent delays emergency care. |
+| KB021 | Nutrition / Micronutrients | NIH Iron (patient summary), 2021 | Fatigue, weakness, blood tests, clinician guidance; **chunk for T027** — iron deficiency. |
+| KB022 | Sleep | AASM Behavioral Sleep Advice, 2021 | Sleep hygiene, screens, environment; **chunk for T029** — insomnia (agent recommends melatonin dose). |
 
 ### Transcripts (`data/transcripts.json`)
 
-Realistic mock conversations covering the required edge cases. Each case exists so the pipeline can be tested on **grounded responses**, **hallucinations**, **empathy failures**, and **medical safety violations**.
+12 realistic mock conversations (T018–T029) covering the required edge cases. Each transcript includes **retrieved_chunks** that reference the knowledge base (e.g. T018 uses chunk `KB013-1`, T024 uses `KB005-1`). The Judge evaluates groundedness against these chunks.
 
 | ID | Type | Expected | Reason for this case |
 |----|------|----------|----------------------|
