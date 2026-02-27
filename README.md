@@ -124,7 +124,7 @@ Structured JSONL audit log + console summary
 
 ```bash
 git clone <repo>
-cd syd-life-eval
+cd LLM_JUDGE_ASSIGNMENT
 
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
@@ -197,10 +197,7 @@ Send `retrieved_chunks` so the Judge evaluates the agent’s reply against the c
 ```powershell
 Invoke-RestMethod -Uri http://localhost:8000/evaluate -Method Post -ContentType "application/json" -InFile payload.json
 ```
-To get JSON instead, call `POST /evaluate/json`:
-```powershell
-Invoke-RestMethod -Uri http://localhost:8000/evaluate/json -Method Post -ContentType "application/json" -InFile payload.json
-```
+
 
 **
 

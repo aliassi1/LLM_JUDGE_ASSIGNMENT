@@ -6,14 +6,7 @@ Loads KB from data/knowledge_base.json and builds the prompt strings.
 import json
 from pathlib import Path
 
-_KB_PATH = Path(__file__).parent.parent.parent / "data" / "knowledge_base.json"
-with _KB_PATH.open() as f:
-    KNOWLEDGE_BASE: list[dict] = json.load(f)
 
-KB_SUMMARY = "\n".join(
-    f"[{item['id']}] ({item['category']}) {item['guideline']}  [Source: {item['source']}]"
-    for item in KNOWLEDGE_BASE
-)
 
 EMPATHY_SYSTEM = """You are an expert evaluator assessing the empathetic quality of a preventive health AI agent's response.
 
