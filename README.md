@@ -175,7 +175,7 @@ curl http://localhost:8000/evaluate/T004
 
 **Example: Custom transcript with retrieved chunks (recommended for groundedness)**
 
-Send `retrieved_chunks` so the Judge evaluates the agent’s reply against the context the agent was supposed to use (RAG-style). Each chunk needs `chunk_id`, `text`, and optionally `source` and `retrieval_score`. You can omit `transcript_id` and `title` (they default to `"CUSTOM"` and `"Custom Submission"`).
+Send `retrieved_chunks` so the Judge evaluates the agent’s reply against the context the agent was supposed to use (RAG-style). Each chunk needs `chunk_id`, `text`, and optionally `source` and `retrieval_score`.
 ```json
 {
   "turns": [
@@ -202,12 +202,7 @@ To get JSON instead, call `POST /evaluate/json`:
 Invoke-RestMethod -Uri http://localhost:8000/evaluate/json -Method Post -ContentType "application/json" -InFile payload.json
 ```
 
-**Example: Use a cheaper model for batch evaluation**
-```bash
-curl "http://localhost:8000/evaluate-all?model=gpt-4o-mini"
-```
-
----
+**
 
 ### Option B: CLI
 
@@ -259,22 +254,3 @@ Every evaluation is appended to `logs/evaluation_audit.jsonl` as a structured JS
   "logged_at": "2025-01-15T10:30:01Z"
 }
 ```
-
----
-
-## Extending the Pipeline
-
-**Add new criteria:** Define a new score model in `evaluator/core/criteria.py`, add a system prompt in `evaluator/prompts/prompts.py` and use it in `evaluator/judge.py`, and update `compute_verdict()`.
-
-**Add new transcripts:** Append entries to `data/transcripts.json` following the existing schema.
-
-**Swap LLM provider:** Replace the OpenAI client in `evaluator/judge.py` with your preferred provider. The `_call()` method is the only integration point.
-
----
-
-## Assumptions
-
-- The "agent" in transcripts is always the last turn or explicitly labeled as `"role": "agent"`.
-- Groundedness scoring uses the full KB injected into the prompt; no vector search/retrieval is needed at this scale.
-- The Judge LLM is trusted to interpret "reasonable general medical knowledge" as not-hallucination (e.g., mentioning that heart disease is serious), while flagging fabricated statistics and invented studies.
-- Production deployment would add authentication on the FastAPI layer — omitted here for scope.
